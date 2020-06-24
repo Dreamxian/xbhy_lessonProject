@@ -53,8 +53,8 @@
     总页数：${pageCount}
     总记录数：${count}
 
-    <a href="/user/list?page=${page-1}">上一页</a>
-    <a href="/user/list?page=${page+1}">下一页</a>
+    <a href="/user/list?page=${page-1>=0?page-1:1}">上一页</a>
+    <a href="/user/list?page=${page+1>=pageCount?pageCount:page+1}">下一页</a>
 </div>
 </body>
 </html>

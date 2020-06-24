@@ -1,6 +1,7 @@
 package com.zhongyuxiang.controller;
 
 import com.zhongyuxiang.entity.Dept;
+import com.zhongyuxiang.entity.Page;
 import com.zhongyuxiang.entity.User;
 import com.zhongyuxiang.service.DeptService;
 import com.zhongyuxiang.service.UserService;
@@ -27,6 +28,8 @@ public class UserServlet extends BaseServlet {
         if(name==null){
             name="";
         }
+
+        Page p=new Page();
 
         //总记录数
         Integer count = userService.getCount();
