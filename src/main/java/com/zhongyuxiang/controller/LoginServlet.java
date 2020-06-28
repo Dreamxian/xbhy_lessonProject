@@ -42,6 +42,14 @@ public class LoginServlet extends BaseServlet {
         }
     }
 
+
+    /**
+     * @return void
+     * @decription 忘记密码
+     * @author zyx
+     * @date 2020/6/28 14:17
+     * @params [request, response]
+     */
     protected void forget(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("username");
         String newPs = request.getParameter("uewPs");

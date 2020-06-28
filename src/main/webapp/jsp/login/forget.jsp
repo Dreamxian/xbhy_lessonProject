@@ -25,9 +25,9 @@
     <form action="/login/forget" method="post">
         用户名：<input type="text" value=" " name="username"/><br/><br/>
         新密码：<input type="password" name="newPs"/><br/><br/>
-        邮箱：<input type="password" name="email"/>
+        邮箱：<input type="text" name="email"/>
         <input onclick="sendEmail()" type="button" value="发送验证码" name="" class="btn btn-primary"/><br/><br/>
-        验证码：<input type="password" name="code"/><br/><br/>
+        验证码：<input type="text" name="code"/><br/><br/>
         <input type="submit" value="修改" name="">
     </form>
 

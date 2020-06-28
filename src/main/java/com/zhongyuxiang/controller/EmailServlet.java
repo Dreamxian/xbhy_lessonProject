@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 public class EmailServlet extends BaseServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email=  request.getParameter("username");
+        String email=  request.getParameter("email");
         HttpSession session=request.getSession();
         PrintWriter out=response.getWriter();
         if (!(email==null||"".equals(email))){
@@ -34,6 +34,5 @@ public class EmailServlet extends BaseServlet {
             }
         }
         out.write("0");
-
     }
 }
