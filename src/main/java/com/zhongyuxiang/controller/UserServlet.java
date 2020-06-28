@@ -1,7 +1,6 @@
 package com.zhongyuxiang.controller;
 
 import com.zhongyuxiang.entity.Dept;
-import com.zhongyuxiang.entity.Page;
 import com.zhongyuxiang.entity.User;
 import com.zhongyuxiang.service.DeptService;
 import com.zhongyuxiang.service.UserService;
@@ -14,57 +13,66 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
 @WebServlet("/user/*")
 public class UserServlet extends BaseServlet {
-    private UserService userService=new UserService();
-    private DeptService deptService=new DeptService();
 
+    private UserService userService = new UserService();
+
+    private DeptService deptService = new DeptService();
+
+    /***
+     * @decription 查询
+     * @author zyx
+     * @date 2020/6/26 18:40
+     * @params [request, response]
+     * @return void
+     */
     public void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name=  request.getParameter("username");
-        if(name==null){
-            name="";
-        }
-
-        Page p=new Page();
-
-        //总记录数
-        Integer count = userService.getCount();
-        //总页数
-        Integer pageCount = count % 5 == 0 ? count / 5 : count / 5 + 1;
-        String pageStr = request.getParameter("page");
-        Integer page = 1;
-        if (!StringUtils.isEmpty(pageStr)) {
-            page = Integer.valueOf(pageStr);
-            if (page <= 0) {
-                page = 1;
-            }
-            if (page >= pageCount) {
-                page = pageCount;
-            }
-        }
-        //总数据
-        List<User> list = userService.listAll(name, page);
-        request.setAttribute("list", list);
-        request.setAttribute("username", name);
+        //查询条件
+        String name = request.getParameter("username");
+        name = name == null ? "" : name;
         //当前页
-        request.setAttribute("page", page);
-        //总记录数
-        request.setAttribute("count", count);
-        //总页数
-        request.setAttribute("pageCount", pageCount);
-        request.getRequestDispatcher("/jsp/user/list.jsp").forward(request, response);
+        String pageStr = request.getParameter("page");
 
+        request.setAttribute("username", name);
+
+        request.setAttribute("page", userService.listAll(name, pageStr));
+        request.getRequestDispatcher("/jsp/user/list.jsp").forward(request, response);
     }
 
+//    public void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        //查询条件
+//        String name = request.getParameter("username");
+//        name = name == null ? "" : name;
+//
+//        Page page = new Page();
+//
+//        String pageStr = request.getParameter("page");
+//        if (!StringUtils.isEmpty(pageStr)) {
+//            page.setPageCurrent(Integer.valueOf(pageStr));
+//        }
+//
+//        //总记录数
+//        Integer count = userService.getCount();
+//        page.setCount(userService.getCount());
+//
+//        //总数据
+//        List<User> list = userService.listAll(name, page);
+//
+//        request.setAttribute("list", list);
+//        request.setAttribute("username", name);
+//        request.setAttribute("page", page);
+//        request.getRequestDispatcher("/jsp/user/list.jsp").forward(request, response);
+//    }
+
     public void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<String,String[]>map= request.getParameterMap();
-        User user=new User();
+        Map<String, String[]> map = request.getParameterMap();
+        User user = new User();
         try {
-            BeanUtils.populate(user,map);
+            BeanUtils.populate(user, map);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -75,6 +83,7 @@ public class UserServlet extends BaseServlet {
     public void getUserByUserName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         String name = request.getParameter("userName");
+        //name==null || "".equals(name)
         if (StringUtils.isEmpty(name)) {
             return;
         }
@@ -82,21 +91,24 @@ public class UserServlet extends BaseServlet {
         if (b) {
             out.write("1");
         } else {
+            //已存在
             out.write("0");
         }
         out.close();
     }
 
     public void toUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id=request.getParameter("id");
-        if(StringUtils.isEmpty(id)){
+        //数据回显
+        String id = request.getParameter("id");
+        if (StringUtils.isEmpty(id)) {
             return;
         }
-        User user=userService.getUserById(Integer.valueOf(id));
-        List<Dept> deptList= deptService.listAll();
-        request.setAttribute("user",user);
-        request.setAttribute("deptList",deptList);
-        request.getRequestDispatcher("/jsp/user/update.jsp").forward(request,response);
+        User user = userService.getUserById(Integer.valueOf(id));
+        List<Dept> deptList = deptService.listAll();
+
+        request.setAttribute("user", user);
+        request.setAttribute("deptList", deptList);
+        request.getRequestDispatcher("/jsp/user/update.jsp").forward(request, response);
     }
 
     public void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -104,13 +116,12 @@ public class UserServlet extends BaseServlet {
     }
 
     public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id=request.getParameter("id");
-        if(StringUtils.isEmpty(id)){
+        String id = request.getParameter("id");
+        if (StringUtils.isEmpty(id)) {
             return;
         }
         userService.delete(Integer.valueOf(id));
         response.sendRedirect("/user/list");
     }
-
 
 }

@@ -5,6 +5,10 @@ import java.util.Date;
 
 public class User implements Serializable {
 
+    //冗余字段（数据库不存在的字段）
+    private String deptName;
+    private String sexName;
+
     private Integer id;
     private String username;
     private String password;
@@ -16,6 +20,7 @@ public class User implements Serializable {
     private String phone;
     private Integer sex;
     private String description;
+    //java.util.Date
     private Date registerTime;
     private String loginTime;
     private String pic;
@@ -107,8 +112,8 @@ public class User implements Serializable {
         return description;
     }
 
-    public void setDescription(String desciption) {
-        this.description = desciption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getRegisterTime() {
@@ -157,5 +162,21 @@ public class User implements Serializable {
 
     public void setDeptId(Integer deptId) {
         this.deptId = deptId;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getSexName() {
+        return sexName;
+    }
+
+    public void setSexName(String sexName) {
+        this.sexName = sexName;
     }
 }

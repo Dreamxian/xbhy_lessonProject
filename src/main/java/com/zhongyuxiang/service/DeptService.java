@@ -1,11 +1,9 @@
 package com.zhongyuxiang.service;
 
 import com.zhongyuxiang.dao.DeptDao;
-import com.zhongyuxiang.dao.UserDao;
 import com.zhongyuxiang.entity.Dept;
-import com.zhongyuxiang.entity.User;
 
-import java.util.Date;
+
 import java.util.List;
 
 /**
@@ -14,9 +12,10 @@ import java.util.List;
  * @Description
  */
 public class DeptService {
-    private DeptDao deptDao=new DeptDao();
 
-    public List<Dept> listAll(){
+    private DeptDao deptDao = new DeptDao();
+
+    public List<Dept> listAll() {
         return deptDao.listAll();
     }
 

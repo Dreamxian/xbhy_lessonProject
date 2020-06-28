@@ -7,10 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
+//@WebServlet("/user/*")
 public class User2Servlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //  /user/list   /user/add   /user/delete
         String uri = request.getRequestURI();
         if (uri.endsWith("list")) {
             list(request, response);

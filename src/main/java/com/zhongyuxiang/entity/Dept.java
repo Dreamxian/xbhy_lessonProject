@@ -2,10 +2,11 @@ package com.zhongyuxiang.entity;
 
 /**
  * @auth zyx
- * @date 2020/6/23
+ * @date 2020/6/22
  * @Description
  */
 public class Dept {
+
     private Integer id;
     private String name;
 

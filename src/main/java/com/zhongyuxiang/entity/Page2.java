@@ -1,13 +1,12 @@
 package com.zhongyuxiang.entity;
 
-import java.util.List;
-
 /**
  * @auth zyx
  * @date 2020/6/26
  * @Description
  */
-public class Page<T> {
+public class Page2 {
+
     //总页数
     private Integer pageCount;
 
@@ -19,8 +18,6 @@ public class Page<T> {
 
     //每页显示的记录数
     private Integer size = 5;
-
-    private List<T> data;
 
     public Integer getPageCount() {
         return this.count % this.size == 0 ? this.count / this.size : this.count / this.size + 1;
@@ -52,13 +49,5 @@ public class Page<T> {
 
     public void setSize(Integer size) {
         this.size = size;
-    }
-
-    public List<T> getData() {
-        return data;
-    }
-
-    public void setData(List<T> data) {
-        this.data = data;
     }
 }

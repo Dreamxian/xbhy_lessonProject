@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * @auth zyx
+ * @auth admin
  * @Description jdbcTemplate连接工具类
  */
 public class DBUtil {

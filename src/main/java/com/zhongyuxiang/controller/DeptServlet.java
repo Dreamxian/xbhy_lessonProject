@@ -1,6 +1,7 @@
 package com.zhongyuxiang.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhongyuxiang.entity.Dept;
 import com.zhongyuxiang.service.DeptService;
 
@@ -18,10 +19,11 @@ import java.util.List;
  */
 @WebServlet("/dept/*")
 public class DeptServlet extends BaseServlet {
-    private DeptService deptService=new DeptService();
+
+    private DeptService deptService = new DeptService();
 
     public void listAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Dept> list=deptService.listAll();
+        List<Dept> list = deptService.listAll();
         response.getWriter().write(JSON.toJSONString(list));
     }
 
