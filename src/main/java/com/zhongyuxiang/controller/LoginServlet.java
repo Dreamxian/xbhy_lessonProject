@@ -52,7 +52,7 @@ public class LoginServlet extends BaseServlet {
      */
     protected void forget(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("username");
-        String newPs = request.getParameter("uewPs");
+        String newPs = request.getParameter("newPs");
         String code = request.getParameter("code");
         //判断账号
         boolean b = userService.getUserByUserName(name);

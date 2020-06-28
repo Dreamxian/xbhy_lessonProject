@@ -18,16 +18,19 @@ import java.io.PrintWriter;
 public class EmailServlet extends BaseServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email=  request.getParameter("email");
-        HttpSession session=request.getSession();
-        PrintWriter out=response.getWriter();
-        if (!(email==null||"".equals(email))){
-            //随即验证
-            String randomCode=Math.random()+"";
-            randomCode= randomCode.substring(randomCode.length()-5,randomCode.length()-1);
-            boolean b= EmailUtil.send(email,randomCode);
-            if (b){
-                session.setAttribute(SysConstant.SESSION_CODE,randomCode);
+        String email = request.getParameter("email");
+
+        HttpSession session = request.getSession();
+
+        PrintWriter out = response.getWriter();
+        if (!(email == null || "".equals(email))) {
+            //随机验证码
+            String randomCode = Math.random() + "";
+            randomCode = randomCode.substring(randomCode.length() - 5, randomCode.length() - 1);
+            boolean b = EmailUtil.send(email, randomCode);
+            if (b) {
+                //把验证码放到session中
+                session.setAttribute(SysConstant.SESSION_CODE, randomCode);
                 session.setMaxInactiveInterval(60);
                 out.write("1");
                 return;

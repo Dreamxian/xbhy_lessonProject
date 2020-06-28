@@ -67,8 +67,6 @@ public class SysFilter implements Filter {
 
             }
         }
-
-
         filterChain.doFilter(request, response);
     }
 }
