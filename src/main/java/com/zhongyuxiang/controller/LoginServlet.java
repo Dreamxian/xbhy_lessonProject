@@ -19,12 +19,17 @@ public class LoginServlet extends BaseServlet {
     private UserService userService = new UserService();
 
     protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String name = request.getParameter("username");
         String password = request.getParameter("password");
         String remember=request.getParameter("remember");
-        HttpSession session = request.getSession();
+        String code=request.getParameter("code");
+
+        //将code信息放入到Session中
+       Object obj= session.getAttribute(SysEnum.SESSION_LOGIN_CODE.getValue());
+
         User user = userService.checkLogin(name, password);
-        if (user == null) {
+        if (user == null||obj==null||!(code.equals(obj.toString()))){
             response.sendRedirect("/index.jsp");
         } else {
             //登录信息放入session中

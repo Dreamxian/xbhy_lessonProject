@@ -8,4 +8,5 @@ package com.zhongyuxiang.constants;
 public class SysConstant {
     public static final String SESSION_LOGIN="sessionLogin";
     public static final String SESSION_CODE="sessionCode";
+    public static final String FILE_PREFIX = "E:\\upload\\";
 }

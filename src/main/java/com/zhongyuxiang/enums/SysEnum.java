@@ -1,12 +1,14 @@
 package com.zhongyuxiang.enums;
 
+
 /**
  * @auth zyx
  * @date 2020/6/28
  * @Description
  */
 public enum SysEnum {
-    COOKIE_LOGIN_NAME("cookieLoginName");
+    COOKIE_LOGIN_NAME("cookieLoginName"),
+    SESSION_LOGIN_CODE("cookieLoginCode");
 
     private String value;
 

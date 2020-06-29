@@ -31,42 +31,43 @@ public class SysFilter implements Filter {
 
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        HttpSession session =request.getSession();
 
-        String uri =request.getRequestURI();
-
-        if (uri.endsWith("/index.jsp")){
-            Cookie[] cookies=request.getCookies();
-            if (cookies!=null){
-                for (Cookie c:cookies){
-                    String cookieName=c.getName();
-                    if (SysEnum.COOKIE_LOGIN_NAME.getValue().equals(cookieName)){
-                       String cookieValue= c.getValue();
-                        //将cookie中的信息放入session
-                       cookieValue= URLDecoder.decode(cookieValue,"utf-8");
-                        User user=JSON.parseObject(cookieValue,new TypeReference<User>(User.class){});
-                        session.setAttribute(SysConstant.SESSION_LOGIN,user);
-                        session.setMaxInactiveInterval(30*60);
-                        //有cookie直接跳转成功页面
-                        filterChain.doFilter(request, response);
-                        request.getRequestDispatcher("/jsp/common/main.jsp").forward(request,response);
-                        return;
-                    }
-                }
-            }
-
-        }else  if (uri.endsWith("/") ||uri.endsWith("/login")
-                ||uri.endsWith("/forget.jsp")||uri.endsWith("/email")||uri.endsWith("/menu")
-                ||uri.endsWith("/login/forget")){
-
-        }else {
-            Object obj=session.getAttribute(SysConstant.SESSION_LOGIN);
-            if (obj==null){
-                request.getRequestDispatcher("/index.jsp").forward(request,response);
-            }else {
-
-            }
-        }
+//        HttpSession session =request.getSession();
+//        String uri =request.getRequestURI();
+//
+//        if (uri.endsWith("/index.jsp")){
+//            Cookie[] cookies=request.getCookies();
+//            if (cookies!=null){
+//                for (Cookie c:cookies){
+//                    String cookieName=c.getName();
+//                    if (SysEnum.COOKIE_LOGIN_NAME.getValue().equals(cookieName)){
+//                       String cookieValue= c.getValue();
+//                        //将cookie中的信息放入session
+//                       cookieValue= URLDecoder.decode(cookieValue,"utf-8");
+//                      //  User user=JSON.parseObject(cookieValue,new TypeReference<User>(User.class){});
+//                        User user=new User();
+//                        session.setAttribute(SysConstant.SESSION_LOGIN,user);
+//                        session.setMaxInactiveInterval(30*60);
+//                        //有cookie直接跳转成功页面
+//                        filterChain.doFilter(request, response);
+//                        request.getRequestDispatcher("/jsp/common/main.jsp").forward(request,response);
+//                        return;
+//                    }
+//                }
+//            }
+//
+//        }else  if (uri.endsWith("/") ||uri.endsWith("/login")
+//                ||uri.endsWith("/forget.jsp")||uri.endsWith("/email")||uri.endsWith("/menu")
+//                ||uri.endsWith("/login/forget")){
+//
+//        }else {
+//            Object obj=session.getAttribute(SysConstant.SESSION_LOGIN);
+//            if (obj==null){
+//                request.getRequestDispatcher("/index.jsp").forward(request,response);
+//            }else {
+//
+//            }
+//        }
         filterChain.doFilter(request, response);
     }
 }
