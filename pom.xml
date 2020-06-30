@@ -121,6 +121,12 @@
       <version>1.4.7</version>
     </dependency>
 
+    <!-- httpClient -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.8</version>
+    </dependency>
 
   </dependencies>
 

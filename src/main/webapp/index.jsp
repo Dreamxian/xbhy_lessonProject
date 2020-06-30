@@ -17,7 +17,8 @@
         <img src="img/getCode" id="img" onclick="changeImg()"/><br/><br/>
         记住我：<input type="checkbox" name="remember" value="1"/><br/><br/>
         <input type="submit" value="登录" name="">
-        <a href="/jsp/login/forget.jsp">忘记密码</a>
+        <a href="/jsp/login/forget.jsp">忘记密码</a><br>
+        <a href="/weChat/login">微信登陆</a>
     </form>
 </body>
 </html>

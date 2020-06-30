@@ -100,4 +100,7 @@ public class UserService {
         userDao.updatePic(id, pic);
     }
 
+    public User getUserWXOpenId(String wxOpenid) {
+       return userDao.getUserWXOpenId(wxOpenid);
+    }
 }

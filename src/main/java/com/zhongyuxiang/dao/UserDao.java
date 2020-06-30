@@ -31,10 +31,10 @@ public class UserDao extends BaseDao {
     }
 
     public void addUser(User user) {
-        String sql = "INSERT INTO USER ( username, password, email, real_name, age, sex, description, register_time,dept_id )" +
-                "values (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO USER ( username, password, email, real_name, age, sex, description, register_time,dept_id,wx_openid )" +
+                "values (?,?,?,?,?,?,?,?,?,?)";
         template.update(sql, user.getUsername(), user.getPassword(), user.getEmail(), user.getRealName(),
-                user.getAge(), user.getSex(), user.getDescription(), user.getRegisterTime(), user.getDeptId());
+                user.getAge(), user.getSex(), user.getDescription(), user.getRegisterTime(), user.getDeptId(),user.getWxOpenid());
     }
 
     public User getUserByUserName(String userName) {
@@ -69,13 +69,23 @@ public class UserDao extends BaseDao {
         }
     }
 
-    public void updatePs(String username,String newPs){
-         String sql="update user set password=? where username=?";
-         template.update(sql,newPs,username);
+    public void updatePs(String username, String newPs) {
+        String sql = "update user set password=? where username=? ";
+        template.update(sql, newPs, username);
     }
 
     public void updatePic(Integer id, String pic) {
         String sql = "update user set pic=? where id=? ";
         template.update(sql, pic, id);
+    }
+
+
+    public User getUserWXOpenId(String wxOpenid) {
+        String sql = "select * from user where wx_openid=?";
+        try {
+            return template.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), wxOpenid);
+        } catch (DataAccessException e) {
+            return null;
+        }
     }
 }
