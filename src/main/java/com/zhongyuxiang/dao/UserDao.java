@@ -15,10 +15,31 @@ import java.util.List;
 public class UserDao extends BaseDao {
 
     public List<User> listAll(String username, Page page) {
-        String sql ="select * from user where username like ?  limit ?,?";
+        String sql = "SELECT " +
+                " d.name deptName, " +
+                " u.id id, " +
+                " u.dept_id deptId, " +
+                " u.username username, " +
+                " u.email email, " +
+                " u.real_name realName, " +
+                " u.age age, " +
+                " u.sex sex, " +
+
+                "case when sex=1 then \"男\" " +
+                " when sex=0 then \"女\" " +
+                " else \"其他\" end sexName," +
+
+                " u.desciption desciption, " +
+                " u.register_time registerTime  " +
+                "FROM " +
+                " USER u " +
+                " LEFT JOIN dept d ON u.dept_id = d.id  " +
+                "WHERE " +
+                " username LIKE ?  LIMIT ?,?";
 
         return template.query(sql, new BeanPropertyRowMapper<>(User.class),
                 "%" + username + "%", (page.getPageCurrent() - 1) * page.getSize(), page.getSize());
+
     }
 
     public Integer getCount(String username) {
@@ -31,7 +52,7 @@ public class UserDao extends BaseDao {
     }
 
     public void addUser(User user) {
-        String sql = "INSERT INTO USER ( username, password, email, real_name, age, sex, description, register_time,dept_id,wx_openid )" +
+        String sql = "INSERT INTO USER ( username, password, email, real_name, age, sex, desciption, register_time,dept_id,wx_openid )" +
                 "values (?,?,?,?,?,?,?,?,?,?)";
         template.update(sql, user.getUsername(), user.getPassword(), user.getEmail(), user.getRealName(),
                 user.getAge(), user.getSex(), user.getDescription(), user.getRegisterTime(), user.getDeptId(),user.getWxOpenid());
@@ -87,5 +108,23 @@ public class UserDao extends BaseDao {
         } catch (DataAccessException e) {
             return null;
         }
+    }
+
+    public List<User> listForExport(String username){
+        String sql="SELECT "+
+                "d.name deptName,"+
+                "u.username username,"+
+                "u.real_name realName,"+
+                "u.age age,"+
+                "u.sex sex, "+
+                "case when sex=1 then \"男\" "+
+                " when sex=0 then \"女\" "+
+                " else \"其他\" end sexName "+
+                "FROM "+
+                "user u "+
+                "LEFT JOIN dept d ON u.dept_id=d.id "+
+                "WHERE "+
+                "u.username LIKE ?";
+        return template.query(sql,new BeanPropertyRowMapper<>(User.class),"%"+username+"%");
     }
 }

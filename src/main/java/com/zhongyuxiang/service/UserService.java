@@ -103,4 +103,5 @@ public class UserService {
     public User getUserWXOpenId(String wxOpenid) {
        return userDao.getUserWXOpenId(wxOpenid);
     }
+
 }

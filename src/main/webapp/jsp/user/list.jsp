@@ -7,14 +7,13 @@
 <%@include file="../common/top.jsp" %>
 <%@include file="../common/left.jsp" %>
 <div id="right">
-
-    <a href="/jsp/user/add.jsp" class="btn btn-success">添加</a><br><br>
-
     <form action="/user/list" method="post">
         用户名： <input type="text" name="username" value="${username}">
-
         <input type="submit" value="查询" class="btn btn-info">
     </form>
+
+    <a href="/jsp/user/add.jsp" class="btn btn-success">添加</a>
+    <a href="/poi/exportUser?username=${username}" class="btn btn-primary">导出Excel</a>
 
     <table class="table table-bordered">
         <tr>
@@ -37,6 +36,13 @@
                 <td>${user.username}</td>
                 <td>${user.realName}</td>
                 <td>${user.age}</td>
+                    <%--<td>--%>
+                    <%--<c:choose>--%>
+                    <%--<c:when test="${user.sex==1}">男</c:when>--%>
+                    <%--<c:when test="${user.sex==0}">女</c:when>--%>
+                    <%--<c:otherwise>其它</c:otherwise>--%>
+                    <%--</c:choose>--%>
+                    <%--</td>--%>
                 <td>${user.sexName}</td>
 
                 <td>

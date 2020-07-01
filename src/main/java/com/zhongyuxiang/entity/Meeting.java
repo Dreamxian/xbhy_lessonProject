@@ -1,15 +1,16 @@
-package com.zhongyuxiang.dao;
+package com.zhongyuxiang.entity;
 
 /**
  * @auth zyx
  * @date 2020/6/30
  * @Description
  */
-public class Meeting {
+public class Meeting extends BaseEntity {
 
+    //部门名称
+    private String deptName;
     private Integer id;
     private Integer deptId;
-    private String deptName;
     private String title;
     private String content;
     private String publishDate;

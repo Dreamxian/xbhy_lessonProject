@@ -7,24 +7,24 @@ package com.zhongyuxiang.entity;
  */
 public class Page2 {
 
-    //总页数
-    private Integer pageCount;
+    //每页显示的数量
+    private Integer pageSize = 5;
 
     //总记录数
     private Integer count;
 
+    //总页数
+    private Integer pageCount;
+
     //当前页
-    private Integer pageCurrent = 1;
+    private Integer pageCurrent;
 
-    //每页显示的记录数
-    private Integer size = 5;
-
-    public Integer getPageCount() {
-        return this.count % this.size == 0 ? this.count / this.size : this.count / this.size + 1;
+    public Integer getPageSize() {
+        return pageSize;
     }
 
-    public void setPageCount(Integer pageCount) {
-        this.pageCount = pageCount;
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 
     public Integer getCount() {
@@ -35,19 +35,19 @@ public class Page2 {
         this.count = count;
     }
 
+    public Integer getPageCount() {
+        return this.count % this.pageSize == 0 ? this.count / this.pageSize : this.count / this.pageSize + 1;
+    }
+
+    public void setPageCount(Integer pageCount) {
+        this.pageCount = pageCount;
+    }
+
     public Integer getPageCurrent() {
         return pageCurrent;
     }
 
     public void setPageCurrent(Integer pageCurrent) {
         this.pageCurrent = pageCurrent;
-    }
-
-    public Integer getSize() {
-        return size;
-    }
-
-    public void setSize(Integer size) {
-        this.size = size;
     }
 }

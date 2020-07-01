@@ -14,7 +14,7 @@
 <%@include file="left.jsp" %>
 
 <div id="right">
-    欢迎界面！
+    <h1>欢迎界面！</h1>
 </div>
 
 </body>
