@@ -41,7 +41,7 @@ public class EmailUtil {
             Session session = Session.getDefaultInstance(properties, new Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(from, "vcghjtjfratofjje");
+                    return new PasswordAuthentication(from, "xzkipnzfrczjggfe");
                 }
             });
             Message message = new MimeMessage(session);

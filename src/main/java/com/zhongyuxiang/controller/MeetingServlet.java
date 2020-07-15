@@ -33,15 +33,12 @@ public class MeetingServlet extends BaseServlet {
         //当前页
         String pageStr = request.getParameter("page");
         Integer pageCurrent = pageStr == null ? 1 : Integer.valueOf(pageStr);
-
         //构造查询条件对象
         Meeting meeting = new Meeting();
         meeting.setTitle(title);
         meeting.setStatus(status);
-
         //总记录数
         Integer count = meetingService.count(meeting);
-
         Page2 page = new Page2();
         page.setPageCurrent(pageCurrent);
         page.setCount(count);
@@ -71,15 +68,12 @@ public class MeetingServlet extends BaseServlet {
         }
         Integer meetingId = Integer.valueOf(idStr);
         Meeting meeting = meetingService.getMeetingById(meetingId);
-
         //应到人数
         String[] shoulds = meeting.getMakeUser().split(",");
         //实到人数
         Integer realCount = meetingService.getMeetingCountByMeetingId(meetingId);
-
         //第一步：判断当前登录人是否需要参加会议
         boolean isNeedJoin = meeting.getMakeUser().contains(loginUser.getId().toString());
-
         //第二部：如果需要参加会议，则判断是否已经参加会议
         if (isNeedJoin) {
             // isNeedJoin：1需要参加会议 ，2不需要参加会议
@@ -94,7 +88,6 @@ public class MeetingServlet extends BaseServlet {
         map.put("shoulds", shoulds.length);
         //实到人数
         map.put("realCount", realCount);
-
         request.setAttribute("meeting", meeting);
         request.setAttribute("map", map);
         request.getRequestDispatcher("/jsp/meeting/detail.jsp").forward(request, response);
